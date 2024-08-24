@@ -65,7 +65,8 @@ router.put('/:id', withAuth, async (req, res) => {
       res.status(404).json({ message: 'No post found with this id!' });
       return;
     }
-
+    
+    console.log(`Post ${req.params.id} updated`)
     res.status(200).json(postData);
   } catch (err) {
     console.error(`Error updating post ${req.params.id}:`, err);

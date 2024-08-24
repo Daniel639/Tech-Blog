@@ -15,14 +15,12 @@ const loginFormHandler = async (event) => {
       });
 
       const responseData = await response.json();
-      console.log('Server response:', responseData);
+      console.log('Server response:', response.status, responseData);
 
       if (response.ok) {
         document.location.replace('/dashboard');
       } else {
-        const errorData = await response.json();
-        console.error('Login failed:', errorData);
-        alert('Failed to log in: ' + (errorData.message || 'Unknown error'));
+        alert('Failed to log in: ' + (responseData.message || 'Unknown error'));
       }
     } catch (error) {
       console.error('Error during login:', error);
