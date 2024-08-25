@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Blog</title>
-    <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Tech Blog</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header class="header">
-        <h1 class="site-title">Tech Blog</h1>
-        <nav class="nav">
-            <a href="/" class="nav-link">Home</a>
-            {{#if logged_in}}
-            <a href="/dashboard" class="nav-link">Dashboard</a>
-            <button id="logout" class="btn btn-logout">Logout</button>
-            {{else}}
-            <a href="/login" class="nav-link">Login</a>
-            <a href="/signup" class="nav-link">Sign Up</a>
-            {{/if}}
-        </nav>
-    </header>
+  <header>
+  <nav>
+    <h1>The Tech Blog</h1>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      {{#if logged_in}}
+        <a href="/dashboard">Dashboard</a>
+        <a href="#" id="logout">Logout</a>
+      {{else}}
+        <a href="/login">Login</a>
+      {{/if}}
+    </div>
+  </nav>
+</header>
 
-    <main class="container">
-        {{{body}}}
-    </main>
+  <main>
+    <div class="container">
+      {{{body}}}
+    </div>
+  </main>
 
-    <footer class="footer">
-        <p>&copy; 2023 Tech Blog. All rights reserved.</p>
-    </footer>
+  <footer>
+    <p>&copy; 2023 Tech Blog. All rights reserved.</p>
+  </footer>
 
-    {{#if logged_in}}
-    <script src="/js/logout.js"></script>
-    {{/if}}
+  {{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
 </body>
 </html>
