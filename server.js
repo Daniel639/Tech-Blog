@@ -12,10 +12,12 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 console.log('Attempting to connect to the database...');
-console.log('DB_HOST:', process.env.DB_HOST);
-console.log('DB_PORT:', process.env.DB_PORT);
-console.log('DB_NAME:', process.env.DB_NAME);
-console.log('DB_USER:', process.env.DB_USER);
+console.log('DATABASE_URL is ' + (process.env.DATABASE_URL ? 'set' : 'not set'));
+
+console.log('DB_HOST is ' + (process.env.DB_HOST ? 'set' : 'not set'));
+console.log('DB_PORT is ' + (process.env.DB_PORT ? 'set' : 'not set'));
+console.log('DB_NAME is ' + (process.env.DB_NAME ? 'set' : 'not set'));
+console.log('DB_USER is ' + (process.env.DB_USER ? 'set' : 'not set'));
 
 // Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({ helpers });
