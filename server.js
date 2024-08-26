@@ -16,8 +16,10 @@ const hbs = exphbs.create({ helpers });
 
 // set up session
 const sess = {
-  secret: 'Super secret secret',
-  cookie: {},
+  secret: process.env.SESSION_SECRET || 'Super secret secret',
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000 // 1 day
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -50,15 +52,23 @@ app.get('/api/test-db', async (req, res) => {
     res.json({ message: 'Database connection successful', userCount: users.length });
   } catch (error) {
     console.error('Unable to connect to the database:', error);
-    res.status(500).json({ error: 'Database connection failed' });
+    res.status(500).json({ error: 'Database connection failed', details: error.message });
   }
 });
 
-sequelize.authenticate()
-  .then(() => console.log('Database connected successfully'))
-  .catch(err => console.error('Unable to connect to the database:', err));
+const startServer = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Database connected successfully');
 
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
-  console.log('Database synced')
-});
+    await sequelize.sync({ force: false });
+    console.log('Database synced');
+
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  } catch (error) {
+    console.error('Unable to start server:', error);
+    process.exit(1);
+  }
+};
+
+startServer();
